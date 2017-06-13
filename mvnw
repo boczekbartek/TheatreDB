@@ -54,7 +54,6 @@ case "`uname`" in
   CYGWIN*) cygwin=true ;;
   MINGW*) mingw=true;;
   Darwin*) darwin=true
-
            #
            # Look for the Apple JDKs first to preserve the existing behaviour, and then look
            # for the new JDKs provided by Oracle.
@@ -87,7 +86,6 @@ case "`uname`" in
              export JAVA_HOME=`/usr/libexec/java_home`
            fi
            ;;
-
 esac
 
 if [ -z "$JAVA_HOME" ] ; then
@@ -186,7 +184,6 @@ fi
 
 CLASSWORLDS_LAUNCHER=org.codehaus.plexus.classworlds.launcher.Launcher
 
-
 # For Cygwin, switch paths to Windows format before running java
 if $cygwin; then
   [ -n "$M2_HOME" ] &&
@@ -204,13 +201,10 @@ find_maven_basedir() {
   local wdir=$(pwd)
   while [ "$wdir" != '/' ] ; do
     wdir=$(cd "$wdir/.."; pwd)
-
     if [ -d "$wdir"/.mvn ] ; then
       basedir=$wdir
       break
     fi
-
-
   done
   echo "${basedir}"
 }
@@ -222,7 +216,6 @@ concat_lines() {
   fi
 }
 
-
 export MAVEN_PROJECTBASEDIR=${MAVEN_BASEDIR:-$(find_maven_basedir)}
 MAVEN_OPTS="$(concat_lines "$MAVEN_PROJECTBASEDIR/.mvn/jvm.config") $MAVEN_OPTS"
 
@@ -231,14 +224,11 @@ MAVEN_OPTS="$(concat_lines "$MAVEN_PROJECTBASEDIR/.mvn/jvm.config") $MAVEN_OPTS"
 MAVEN_CMD_LINE_ARGS="$MAVEN_CONFIG $@"
 export MAVEN_CMD_LINE_ARGS
 
-
 WRAPPER_LAUNCHER=org.apache.maven.wrapper.MavenWrapperMain
 
 exec "$JAVACMD" \
   $MAVEN_OPTS \
-
   -classpath "./.mvn/wrapper/maven-wrapper.jar" \
   "-Dmaven.home=${M2_HOME}" "-Dmaven.multiModuleProjectDirectory=${MAVEN_PROJECTBASEDIR}" \
   ${WRAPPER_LAUNCHER} "$@"
-
 

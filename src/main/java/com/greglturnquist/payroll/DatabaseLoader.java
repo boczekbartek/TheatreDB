@@ -28,19 +28,35 @@ import org.springframework.stereotype.Component;
 public class DatabaseLoader implements CommandLineRunner {
 
 	private final ProductionsRepository productionsRepository;
-
+	private final ProfessionsRepository professionsRepository;
+	private final TheatreOfficesRepository theatreOfficesRepository;
 	@Autowired
-	public DatabaseLoader(ProductionsRepository productionsRepository) {
+	public DatabaseLoader(ProductionsRepository productionsRepository,
+						  ProfessionsRepository professionsRepository,
+						  TheatreOfficesRepository theatreOfficesRepository) {
 		this.productionsRepository = productionsRepository;
+		this.professionsRepository = professionsRepository;
+		this.theatreOfficesRepository = theatreOfficesRepository;
 	}
 
 	@Override
 	public void run(String... strings) throws Exception {
 //		this.productionsRepository.save(new Production("Mamma mia", "None", "Musical"));
-
-		System.out.println("\n1.All productions()...");
+		this.professionsRepository.save(new Profession(("Scenażysta")));
+		this.theatreOfficesRepository.save(new TheatreOffice("Marszalkowska","124e", "01-111", "Warszawa"));
+		this.theatreOfficesRepository.save(new TheatreOffice("Towarowa","122d", "02-131", "Warszawa"));
+		this.theatreOfficesRepository.save(new TheatreOffice("Teatralna","11e", "01-134", "Warszawa"));
+		this.theatreOfficesRepository.save(new TheatreOffice("Marszalkowska","124e", "01-111", "Krakow"));
+		System.out.println("\n1.All productions...");
 		for (Production production : productionsRepository.findAll()) {
 			System.out.println(production);
+		}
+		System.out.println("\n1.All professions...");
+		for (Profession profession : professionsRepository.findAll()) {
+			System.out.println(profession);
+		}
+		for(TheatreOffice office : theatreOfficesRepository.findAllByCity("Warszawa")) {
+			System.out.println(office);
 		}
 	}
 }
