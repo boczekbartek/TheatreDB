@@ -1,0 +1,13 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+.idea/
+
+
+images/
+
+node_modules/
+
+react-and-spring-data-rest-basic.iml
+
+target/
+
